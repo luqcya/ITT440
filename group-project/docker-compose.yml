@@ -2,23 +2,42 @@ version: '3'
 
 services:
   mysql:
+    container_name: mysql
     image: mysql:latest
     build: ./mysql
     ports:
       - "3306:3306"
     restart: always
   
-  python-server:
-    build: ./python-server
+  # python-server:
+  #   container_name: python-server
+  #   build: ./python-server
+  #   depends_on:
+  #     - mysql
+  #   ports:
+  #     - "5002:5002"
+  #   restart: always
+
+  # python-client:
+  #   container_name: python-client
+  #   build: ./python-client
+  #   depends_on:
+  #     - python-server
+  #   restart: always
+
+  c-server:
+    container_name: c-server
+    build: ./c-server
     depends_on:
       - mysql
     ports:
-      - "5002:5002"
+      - "6002:6002"
     restart: always
 
-  python-client:
-    build: ./python-client
+  c-client:
+    container_name: c-client
+    build: ./c-client
     depends_on:
-      - python-server
+      - c-server
     restart: always
     

@@ -1,0 +1,11 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y build-essential libmysqlclient-dev
+
+COPY client.c /app/client.c
+
+WORKDIR /app
+
+RUN gcc -o client client.c
+
+CMD ["./client"]

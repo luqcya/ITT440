@@ -21,4 +21,4 @@ def get_latest_points(user):
         client_socket.close()
 
 if __name__ == "__main__":
-    get_latest_points("luqman")
+    get_latest_points("luqman-python")
