@@ -2,11 +2,11 @@ FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y build-essential libmysqlclient-dev
 
-COPY server.c /app/server.c
+COPY server /app/server
 
 WORKDIR /app
 
-RUN gcc -o server server.c -lmysqlclient -I /usr/include/mysql -L /usr/lib/mysql
+# RUN gcc -o server server.c -lmysqlclient -I /usr/include/mysql -L /usr/lib/mysql
 
 EXPOSE 6002
 

@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y build-essential libmysqlclient-dev
+RUN apt-get update && apt-get install -y build-essential
 
 COPY client.c /app/client.c
 
