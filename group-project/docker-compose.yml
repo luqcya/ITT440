@@ -42,11 +42,11 @@ services:
     restart: always
 
 
-# DEBUG-CONTAINER FOR C-CLIENT
-  # ubuntu-container:
-  #     container_name: debug-ubuntu
-  #     image: ubuntu:latest
-  #     command: sleep infinity
-  #     tty: true
-  #     stdin_open: true
-  #     restart: always
+#DEBUG-CONTAINER FOR C-CLIENT
+  debug-c-client:
+      container_name: debug-c-client
+      build: ./debug-c-client
+      command: sleep infinity
+      tty: true
+      stdin_open: true
+      restart: always
