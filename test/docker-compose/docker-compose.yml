@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    image: nginx
+    networks:
+      test_network:
+        ipv4_address: 172.16.238.10
+  db:
+    image: postgres
+    networks:
+      test_network:
+        ipv4_address: 172.16.238.11
+networks:
+  test_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24

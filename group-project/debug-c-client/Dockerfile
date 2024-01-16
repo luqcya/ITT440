@@ -8,5 +8,7 @@ WORKDIR /app
 
 COPY client.c /app/client.c
 
-CMD [ "/bin/bash" ]
+RUN gcc -o client client.c
+
+CMD [ "./client" ]
 

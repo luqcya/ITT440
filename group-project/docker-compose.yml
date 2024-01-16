@@ -1,10 +1,12 @@
-version: '3.3'
-
+version: '3'
 services:
   mysql:
     container_name: mysql
     image: mysql:latest
     build: ./mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.2
     ports:
       - "3306:3306"
     restart: always
@@ -14,6 +16,9 @@ services:
     build: ./python-server
     depends_on:
       - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.3
     ports:
       - "5002:5002"
     restart: always
@@ -23,6 +28,9 @@ services:
     build: ./python-client
     depends_on:
       - python-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.4
     restart: always
 
   c-server:
@@ -30,6 +38,9 @@ services:
     build: ./c-server
     depends_on:
       - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.5
     ports:
       - "6002:6002"
     restart: always
@@ -39,14 +50,27 @@ services:
     build: ./c-client
     depends_on:
       - c-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.6
     restart: always
 
-
 #DEBUG-CONTAINER FOR C-CLIENT
-  debug-c-client:
-      container_name: debug-c-client
-      build: ./debug-c-client
-      command: sleep infinity
-      tty: true
-      stdin_open: true
-      restart: always
+  # debug-c-client:
+  #     container_name: debug-c-client
+  #     build: ./debug-c-client
+  #     networks:
+  #       itt440:
+  #         ipv4_address: 172.16.238.7
+  #     command: sleep infinity
+  #     tty: true
+  #     stdin_open: true
+  #     restart: always
+
+networks:
+  itt440:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+

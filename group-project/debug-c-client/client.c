@@ -42,7 +42,7 @@ void get_latest_points(const char *user, const char *serverHostname) {
 
 int main() {
     const char *user = "luqman-c";
-    const char *serverHostname = "c-server";
+    const char *serverHostname = "172.16.238.5";
 
     get_latest_points(user, serverHostname);
 
