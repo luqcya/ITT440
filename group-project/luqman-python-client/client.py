@@ -4,7 +4,7 @@ def get_latest_points(user):
     try:
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        server_address = ('python-server', 5002)
+        server_address = ('luqman-python-server', 5002)
 
         client_socket.connect(server_address)
 

@@ -12,8 +12,8 @@ services:
     restart: always
   
   python-server:
-    container_name: python-server
-    build: ./python-server
+    container_name: luqman-python-server
+    build: ./luqman-python-server
     depends_on:
       - mysql
     networks:
@@ -24,8 +24,8 @@ services:
     restart: always
 
   python-client:
-    container_name: python-client
-    build: ./python-client
+    container_name: luqman-python-client
+    build: ./luqman-python-client
     depends_on:
       - python-server
     networks:
@@ -34,8 +34,8 @@ services:
     restart: always
 
   c-server:
-    container_name: c-server
-    build: ./c-server
+    container_name: luqman-c-server
+    build: ./luqman-c-server
     depends_on:
       - mysql
     networks:
@@ -46,8 +46,8 @@ services:
     restart: always
 
   c-client:
-    container_name: c-client
-    build: ./c-client
+    container_name: luqman-c-client
+    build: ./luqman-c-client
     depends_on:
       - c-server
     networks:
