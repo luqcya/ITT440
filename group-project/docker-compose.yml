@@ -55,18 +55,6 @@ services:
         ipv4_address: 172.16.238.6
     restart: always
 
-#DEBUG-CONTAINER FOR C-CLIENT
-  # debug-c-client:
-  #     container_name: debug-c-client
-  #     build: ./debug-c-client
-  #     networks:
-  #       itt440:
-  #         ipv4_address: 172.16.238.7
-  #     command: sleep infinity
-  #     tty: true
-  #     stdin_open: true
-  #     restart: always
-
 networks:
   itt440:
     ipam:
