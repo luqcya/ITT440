@@ -1,36 +1,38 @@
 #include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <errno.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
-int main(void){
-    pid_t pid;
-    int rv;
+int main() {
+    pid_t child1, child2;
+    int status1, status2;
 
-    switch (pid = fork()){
-    case -1:
-        perror("fork");
-        exit(1);
-    
-    case 0:
-        printf("CHILD: This is the child process!\n");
-        printf("CHILD: My PID is %d\n", getpid());
-        printf("CHILD: My parent's PID is %d\n", getppid());
-        printf("CHILD: Enter my exit status (make it small): ");
-        scanf("%d", &rv);
-        printf("CHILD: i'm outta here!\n");
-        exit(rv);
-    
-    default:
-        printf("PRINT: This is parent process!\n");
-        printf("PARENT: My PID is %d\n", getpid());
-        printf("PARENT: My child's PID is %d\n", pid);
-        printf("PARENT: I'm now waiting for child to exit()...\n");
-        wait(&rv);
-        printf("PARENT: My child's is exit status is: %d\n", WEXITSTATUS(rv));
-        printf("PARENT: I'm outta here!\n");
+    child1 = fork();
+
+    if (child1 < 0) {
+        perror("Fork failed for child1");
+        exit(EXIT_FAILURE);
+    } else if (child1 == 0) {
+        printf("Child 1 (PID: %d) is running\n", getpid());
+        exit(EXIT_SUCCESS);
     }
+
+    child2 = fork();
+
+    if (child2 < 0) {
+        perror("Fork failed for child2");
+        exit(EXIT_FAILURE);
+    } else if (child2 == 0) {
+        printf("Child 2 (PID: %d) is running\n", getpid());
+        exit(EXIT_SUCCESS);
+    }
+
+    waitpid(child1, &status1, 0);
+    waitpid(child2, &status2, 0);
+
+    printf("Child 1 (PID: %d) exited with status: %d\n", child1, WEXITSTATUS(status1));
+    printf("Child 2 (PID: %d) exited with status: %d\n", child2, WEXITSTATUS(status2));
+
     return 0;
 }
