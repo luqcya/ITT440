@@ -2,7 +2,6 @@ version: '3'
 services:
   mysql:
     container_name: mysql
-    image: mysql:latest
     build: ./mysql
     networks:
       itt440:
@@ -11,7 +10,7 @@ services:
       - "3306:3306"
     restart: always
   
-  python-server:
+  luqman-python-server:
     container_name: luqman-python-server
     build: ./luqman-python-server
     depends_on:
@@ -23,17 +22,17 @@ services:
       - "5002:5002"
     restart: always
 
-  python-client:
+  luqman-python-client:
     container_name: luqman-python-client
     build: ./luqman-python-client
     depends_on:
-      - python-server
+      - luqman-python-server
     networks:
       itt440:
         ipv4_address: 172.16.238.4
     restart: always
 
-  c-server:
+  luqman-c-server:
     container_name: luqman-c-server
     build: ./luqman-c-server
     depends_on:
@@ -45,11 +44,11 @@ services:
       - "6002:6002"
     restart: always
 
-  c-client:
+  luqman-c-client:
     container_name: luqman-c-client
     build: ./luqman-c-client
     depends_on:
-      - c-server
+      - luqman-c-server
     networks:
       itt440:
         ipv4_address: 172.16.238.6
