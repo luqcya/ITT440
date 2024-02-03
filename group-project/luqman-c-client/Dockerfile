@@ -8,4 +8,5 @@ WORKDIR /app
 
 RUN gcc -o client client.c
 
-CMD ["./client"]
+CMD sh -c './client && sleep 30'
+

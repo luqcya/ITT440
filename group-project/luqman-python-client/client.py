@@ -1,4 +1,5 @@
 import socket
+import time
 
 def get_latest_points(user):
     try:
@@ -21,4 +22,6 @@ def get_latest_points(user):
         client_socket.close()
 
 if __name__ == "__main__":
-    get_latest_points("luqman-python")
+    while True:
+        get_latest_points("luqman-python")
+        time.sleep(30)
