@@ -66,6 +66,50 @@ services:
       - "4002:4002"
     restart: always
 
+  sholeh-python-server:
+    container_name: sholeh-python-server
+    build: ./sholeh-python-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.18
+    ports:
+      - "8002:8002"
+    restart: always
+
+  sholeh-python-client:
+    container_name: sholeh-python-client
+    build: ./sholeh-python-client
+    depends_on:
+      - sholeh-python-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.19
+    restart: always
+
+  sholeh-c-server:
+    container_name: sholeh-c-server
+    build: ./sholeh-c-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.20
+    ports:
+      - "9002:9002"
+    restart: always
+
+  sholeh-c-client:
+    container_name: sholeh-c-client
+    build: ./sholeh-c-client
+    depends_on:
+      - sholeh-c-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.21
+    restart: always
+
   ira-python-client:
     container_name: ira-python-client
     build: ./ira-python-client
