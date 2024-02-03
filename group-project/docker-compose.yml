@@ -54,6 +54,50 @@ services:
         ipv4_address: 172.16.238.6
     restart: always
 
+  ira-python-server:
+    container_name: ira-python-server
+    build: ./ira-python-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.22
+    ports:
+      - "4002:4002"
+    restart: always
+
+  ira-python-client:
+    container_name: ira-python-client
+    build: ./ira-python-client
+    depends_on:
+      - ira-python-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.23
+    restart: always
+
+  ira-c-server:
+    container_name: ira-c-server
+    build: ./ira-c-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.24
+    ports:
+      - "2002:2002"
+    restart: always
+
+  ira-c-client:
+    container_name: ira-c-client
+    build: ./ira-c-client
+    depends_on:
+      - ira-c-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.25
+    restart: always
+
 networks:
   itt440:
     ipam:
