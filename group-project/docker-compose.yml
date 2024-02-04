@@ -54,6 +54,50 @@ services:
         ipv4_address: 172.16.238.6
     restart: always
 
+  nabil-python-server:
+    container_name: nabil-python-server
+    build: ./nabil-python-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.13
+    ports:
+      - "8004:8004"
+    restart: always
+
+  nabil-python-client:
+    container_name: nabil-python-client
+    build: ./nabil-python-client
+    depends_on:
+      - nabil-python-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.14
+    restart: always
+
+  nabil-c-server:
+    container_name: nabil-c-server
+    build: ./nabil-c-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.15
+    ports:
+      - "6097:6097"
+    restart: always
+
+  nabil-c-client:
+    container_name: nabil-c-client
+    build: ./nabil-c-client
+    depends_on:
+      - nabil-c-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.16
+    restart: always
+
   ira-python-server:
     container_name: ira-python-server
     build: ./ira-python-server
