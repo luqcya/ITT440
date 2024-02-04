@@ -230,6 +230,50 @@ services:
         ipv4_address: 172.16.238.25
     restart: always
 
+  azam-python-server:
+    container_name: azam-python-server
+    build: ./azam-python-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.26
+    ports:
+      - "8321:8321"
+    restart: always
+
+  azam-python-client:
+    container_name: azam-python-client
+    build: ./azam-python-client
+    depends_on:
+      - azam-python-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.27
+    restart: always
+
+  azam-c-server:
+    container_name: azam-c-server
+    build: ./azam-c-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.28
+    ports:
+      - "7123:7123"
+    restart: always
+
+  azam-c-client:
+    container_name: azam-c-client
+    build: ./azam-c-client
+    depends_on:
+      - azam-c-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.29
+    restart: always
+
 networks:
   itt440:
     ipam:
