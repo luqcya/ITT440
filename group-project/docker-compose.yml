@@ -54,6 +54,50 @@ services:
         ipv4_address: 172.16.238.6
     restart: always
 
+  fakhirul-python-server:
+    container_name: fakhirul-python-server
+    build: ./fakhirul-python-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.8
+    ports:
+      - "8123:8123"
+    restart: always
+
+  fakhirul-python-client:
+    container_name: fakhirul-python-client
+    build: ./fakhirul-python-client
+    depends_on:
+      - fakhirul-python-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.9
+    restart: always
+
+  fakhirul-c-server:
+    container_name: fakhirul-c-server
+    build: ./fakhirul-c-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.10
+    ports:
+      - "6123:6123"
+    restart: always
+
+  fakhirul-c-client:
+    container_name: fakhirul-c-client
+    build: ./fakhirul-c-client
+    depends_on:
+      - fakhirul-c-server
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.11
+    restart: always
+
   nabil-python-server:
     container_name: nabil-python-server
     build: ./nabil-python-server
@@ -98,18 +142,6 @@ services:
         ipv4_address: 172.16.238.16
     restart: always
 
-  ira-python-server:
-    container_name: ira-python-server
-    build: ./ira-python-server
-    depends_on:
-      - mysql
-    networks:
-      itt440:
-        ipv4_address: 172.16.238.22
-    ports:
-      - "4002:4002"
-    restart: always
-
   sholeh-python-server:
     container_name: sholeh-python-server
     build: ./sholeh-python-server
@@ -152,6 +184,18 @@ services:
     networks:
       itt440:
         ipv4_address: 172.16.238.21
+    restart: always
+
+  ira-python-server:
+    container_name: ira-python-server
+    build: ./ira-python-server
+    depends_on:
+      - mysql
+    networks:
+      itt440:
+        ipv4_address: 172.16.238.22
+    ports:
+      - "4002:4002"
     restart: always
 
   ira-python-client:
